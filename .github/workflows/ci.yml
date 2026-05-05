@@ -1,0 +1,37 @@
+name: Frontend CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type-check
+        run: npm run type-check
+
+      - name: Build
+        env:
+          # Build için minimum env. Vercel kendi env'ini kullanır; CI sadece derleme test eder.
+          NEXT_PUBLIC_API_URL: https://example.com
+          SITE_DOMAIN: example.com
+          REVALIDATE_SECRET: ci-dummy
+        run: npm run build
