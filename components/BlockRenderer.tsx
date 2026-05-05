@@ -5,8 +5,11 @@ import { Hero } from './blocks/Hero';
 import { RichText } from './blocks/RichText';
 import { Footer } from './blocks/Footer';
 import { HeroSchool } from './blocks/HeroSchool';
+import { HeroVideo } from './blocks/HeroVideo';
 import { CourseGrid } from './blocks/CourseGrid';
 import { AccommodationGrid } from './blocks/AccommodationGrid';
+import { DestinationsGrid } from './blocks/DestinationsGrid';
+import { About } from './blocks/About';
 import { CityHighlights } from './blocks/CityHighlights';
 import { ArticleList } from './blocks/ArticleList';
 import { PricingTable } from './blocks/PricingTable';
@@ -18,29 +21,18 @@ import { CtaBanner } from './blocks/CtaBanner';
 import { FooterMega } from './blocks/FooterMega';
 
 const COMPONENTS = {
-  header: Header,
-  hero: Hero,
-  rich_text: RichText,
-  footer: Footer,
-  hero_school: HeroSchool,
-  course_grid: CourseGrid,
-  accommodation_grid: AccommodationGrid,
-  city_highlights: CityHighlights,
-  article_list: ArticleList,
-  pricing_table: PricingTable,
-  contact_form: ContactForm,
-  faq: Faq,
-  testimonials: Testimonials,
-  trust_bar: TrustBar,
-  cta_banner: CtaBanner,
-  footer_mega: FooterMega,
+  header: Header, hero: Hero, rich_text: RichText, footer: Footer,
+  hero_school: HeroSchool, hero_video: HeroVideo,
+  course_grid: CourseGrid, accommodation_grid: AccommodationGrid,
+  destinations_grid: DestinationsGrid, about: About,
+  city_highlights: CityHighlights, article_list: ArticleList,
+  pricing_table: PricingTable, contact_form: ContactForm,
+  faq: Faq, testimonials: Testimonials, trust_bar: TrustBar,
+  cta_banner: CtaBanner, footer_mega: FooterMega,
 } as const;
 
 export function BlockRenderer({
-  blocks,
-  site,
-  locale,
-  alternates,
+  blocks, site, locale, alternates,
 }: {
   blocks: Block[];
   site: Site;
@@ -58,23 +50,14 @@ export function BlockRenderer({
               alternates: Record<string, string>;
             }>
           | undefined;
-
         if (!Component) {
           if (process.env.NODE_ENV !== 'production') {
-            // eslint-disable-next-line no-console
             console.warn(`[BlockRenderer] unknown block type: ${(block as { type: string }).type}`);
           }
           return null;
         }
-
         return (
-          <Component
-            key={block.id}
-            content={block.content}
-            site={site}
-            locale={locale}
-            alternates={alternates}
-          />
+          <Component key={block.id} content={block.content} site={site} locale={locale} alternates={alternates} />
         );
       })}
     </main>
