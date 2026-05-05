@@ -189,6 +189,23 @@ export type CtaBannerBlock = BlockBase & {
   };
 };
 
+
+export type AboutBlock = BlockBase & {
+  type: 'about';
+  content: {
+    title?: string;
+    description?: string;
+    image_url?: string;
+    badge_value?: string;
+    badge_label?: string;
+    features?: Array<{
+      icon?: string;
+      title: string;
+      description?: string;
+    }>;
+  };
+};
+
 export type FooterMegaBlock = BlockBase & {
   type: 'footer_mega';
   content: {
@@ -204,9 +221,9 @@ export type FooterMegaBlock = BlockBase & {
 
 // ─── Union ────────────────────────────────────────────────────────────
 export type Block =
-  | HeaderBlock | HeroBlock | RichTextBlock | FooterBlock
-  | HeroSchoolBlock | CourseGridBlock | AccommodationGridBlock
-  | CityHighlightsBlock | ArticleListBlock | PricingTableBlock
+  | HeaderBlock | HeroBlock | HeroVideoBlock | RichTextBlock | FooterBlock
+  | HeroSchoolBlock | CourseGridBlock | AccommodationGridBlock | DestinationsGridBlock
+  | AboutBlock | CityHighlightsBlock | ArticleListBlock | PricingTableBlock
   | ContactFormBlock | FaqBlock | TestimonialsBlock | TrustBarBlock
   | CtaBannerBlock | FooterMegaBlock;
 
