@@ -189,6 +189,40 @@ export type CtaBannerBlock = BlockBase & {
   };
 };
 
+
+
+// ─── Kaplan TV pivot additions ────────────────────────────────────────
+export type HeroVideoBlock = BlockBase & {
+  type: 'hero_video';
+  content: {
+    youtube_url?: string;
+    badge_text?: string;
+    headline?: string;
+    subheadline?: string;
+    cta_label?: string;
+    cta_href?: string;
+    secondary_cta_label?: string;
+    secondary_cta_href?: string;
+    overlay_color?: string;
+    poster_image?: string;
+  };
+};
+
+export type DestinationsGridBlock = BlockBase & {
+  type: 'destinations_grid';
+  content: {
+    title?: string;
+    intro?: string;
+    items?: Array<{
+      city: string;
+      country?: string;
+      image_url?: string;
+      href?: string;
+      description?: string;
+      badge?: string;
+    }>;
+  };
+};
 export type FooterMegaBlock = BlockBase & {
   type: 'footer_mega';
   content: {
@@ -204,8 +238,8 @@ export type FooterMegaBlock = BlockBase & {
 
 // ─── Union ────────────────────────────────────────────────────────────
 export type Block =
-  | HeaderBlock | HeroBlock | RichTextBlock | FooterBlock
-  | HeroSchoolBlock | CourseGridBlock | AccommodationGridBlock
+  | HeaderBlock | HeroBlock | HeroVideoBlock | RichTextBlock | FooterBlock
+  | HeroSchoolBlock | CourseGridBlock | AccommodationGridBlock | DestinationsGridBlock
   | CityHighlightsBlock | ArticleListBlock | PricingTableBlock
   | ContactFormBlock | FaqBlock | TestimonialsBlock | TrustBarBlock
   | CtaBannerBlock | FooterMegaBlock;

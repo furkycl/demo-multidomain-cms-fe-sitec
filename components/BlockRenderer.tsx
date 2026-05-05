@@ -5,8 +5,10 @@ import { Hero } from './blocks/Hero';
 import { RichText } from './blocks/RichText';
 import { Footer } from './blocks/Footer';
 import { HeroSchool } from './blocks/HeroSchool';
+import { HeroVideo } from './blocks/HeroVideo';
 import { CourseGrid } from './blocks/CourseGrid';
 import { AccommodationGrid } from './blocks/AccommodationGrid';
+import { DestinationsGrid } from './blocks/DestinationsGrid';
 import { CityHighlights } from './blocks/CityHighlights';
 import { ArticleList } from './blocks/ArticleList';
 import { PricingTable } from './blocks/PricingTable';
@@ -23,8 +25,10 @@ const COMPONENTS = {
   rich_text: RichText,
   footer: Footer,
   hero_school: HeroSchool,
+  hero_video: HeroVideo,
   course_grid: CourseGrid,
   accommodation_grid: AccommodationGrid,
+  destinations_grid: DestinationsGrid,
   city_highlights: CityHighlights,
   article_list: ArticleList,
   pricing_table: PricingTable,
