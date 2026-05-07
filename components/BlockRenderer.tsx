@@ -20,19 +20,39 @@ import { TrustBar } from './blocks/TrustBar';
 import { CtaBanner } from './blocks/CtaBanner';
 import { FooterMega } from './blocks/FooterMega';
 
-const COMPONENTS = {
-  header: Header, hero: Hero, rich_text: RichText, footer: Footer,
-  hero_school: HeroSchool, hero_video: HeroVideo,
-  course_grid: CourseGrid, accommodation_grid: AccommodationGrid,
-  destinations_grid: DestinationsGrid, about: About,
-  city_highlights: CityHighlights, article_list: ArticleList,
-  pricing_table: PricingTable, contact_form: ContactForm,
-  faq: Faq, testimonials: Testimonials, trust_bar: TrustBar,
-  cta_banner: CtaBanner, footer_mega: FooterMega,
-} as const;
+/**
+ * COMPONENTS map'i strict tipini kaybetmemek için Record<string, ...> ile
+ * tipleyip dinamik block.type indexlemeye izin veriyoruz. Her component
+ * kendi içinde content tipini doğru handle ediyor.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const COMPONENTS: Record<string, React.ComponentType<any>> = {
+  header: Header,
+  hero: Hero,
+  rich_text: RichText,
+  footer: Footer,
+  hero_school: HeroSchool,
+  hero_video: HeroVideo,
+  course_grid: CourseGrid,
+  accommodation_grid: AccommodationGrid,
+  destinations_grid: DestinationsGrid,
+  about: About,
+  city_highlights: CityHighlights,
+  article_list: ArticleList,
+  pricing_table: PricingTable,
+  contact_form: ContactForm,
+  faq: Faq,
+  testimonials: Testimonials,
+  trust_bar: TrustBar,
+  cta_banner: CtaBanner,
+  footer_mega: FooterMega,
+};
 
 export function BlockRenderer({
-  blocks, site, locale, alternates,
+  blocks,
+  site,
+  locale,
+  alternates,
 }: {
   blocks: Block[];
   site: Site;
@@ -42,22 +62,22 @@ export function BlockRenderer({
   return (
     <main>
       {blocks.map((block) => {
-        const Component = COMPONENTS[block.type] as
-          | React.ComponentType<{
-              content: typeof block.content;
-              site: Site;
-              locale: Locale;
-              alternates: Record<string, string>;
-            }>
-          | undefined;
+        const Component = COMPONENTS[block.type];
         if (!Component) {
           if (process.env.NODE_ENV !== 'production') {
-            console.warn(`[BlockRenderer] unknown block type: ${(block as { type: string }).type}`);
+            // eslint-disable-next-line no-console
+            console.warn(`[BlockRenderer] unknown block type: ${block.type}`);
           }
           return null;
         }
         return (
-          <Component key={block.id} content={block.content} site={site} locale={locale} alternates={alternates} />
+          <Component
+            key={block.id}
+            content={block.content}
+            site={site}
+            locale={locale}
+            alternates={alternates}
+          />
         );
       })}
     </main>
